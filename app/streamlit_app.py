@@ -56,6 +56,8 @@ while True:
     
     # Wait for 30 seconds before the next update
     time.sleep(30)
+
+    
 import streamlit as st
 import time
 import requests
