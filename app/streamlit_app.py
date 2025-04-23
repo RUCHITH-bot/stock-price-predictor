@@ -2,16 +2,17 @@ import streamlit as st
 import sys, os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 
+from src.model_xgb import build_xgb_model
+from src.data_loader import download_stock_data
+from src.preprocessing import preprocess_data
+from src.model_lstm import build_lstm_model
+
 import pandas as pd
 import numpy as np
+from sklearn.metrics import mean_squared_error
 import matplotlib.pyplot as plt
 import tensorflow as tf
 
-from data_loader import download_stock_data
-from preprocessing import preprocess_data
-from model_lstm import build_lstm_model
-from model_xgb import build_xgb_model
-from sklearn.metrics import mean_squared_error
 
 st.set_page_config(page_title="Stock Predictor", layout="centered")
 st.title("📈 Stock Price Predictor")
