@@ -2,14 +2,16 @@ import streamlit as st
 import time
 import requests
 
-# Set up your NewsAPI key (sign up at https://newsapi.org/)
-API_KEY = '7f14023dd95d45d884e821f2e44fcfb5'  # Replace with your actual API key
+# Set the page configuration first (before any other Streamlit command)
+st.set_page_config(page_title="Stock News Updates", layout="centered")
+
+# Set up your NewsAPI key
+API_KEY = '7f14023dd95d45d884e821f2e44fcfb5'  # Your actual API key
 
 # Placeholder for news updates
 news_placeholder = st.empty()
 
 # Streamlit app UI
-st.set_page_config(page_title="Stock News Updates", layout="centered")
 st.title("📰 Real-Time Stock News Updates")
 
 # Input: User provides stock ticker
