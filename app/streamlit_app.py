@@ -8,6 +8,9 @@ import streamlit as st
 from datetime import datetime
 from streamlit_autorefresh import st_autorefresh
 
+# Streamlit App Configuration (Move this to the very top)
+st.set_page_config(page_title="Stock Predictor", layout="centered")
+
 # Append the src folder to path for module imports
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 
@@ -32,8 +35,7 @@ def get_live_price(ticker_symbol):
     except:
         return None
 
-# Streamlit App Configuration
-st.set_page_config(page_title="Stock Predictor", layout="centered")
+# Streamlit App Title
 st.title("📈 Stock Price Predictor")
 
 # Sidebar Inputs
