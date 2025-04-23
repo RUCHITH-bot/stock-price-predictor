@@ -6,3 +6,4 @@ matplotlib
 tensorflow
 xgboost
 yfinance
+streamlit-autorefresh

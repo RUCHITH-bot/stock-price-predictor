@@ -1,19 +1,38 @@
-import streamlit as st
-import numpy as np
+import sys, os
+import yfinance as yf
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import mean_squared_error
-import sys, os
+import streamlit as st
+from datetime import datetime
+from streamlit_autorefresh import st_autorefresh
 
-# Add src directory to path
+# Append the src folder to path for module imports
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 
+# Import functions from src
 from model_xgb import build_xgb_model
 from data_loader import download_stock_data
 from preprocessing import preprocess_data
 from model_lstm import build_lstm_model
 
-# Streamlit config
+# Optional: Auto refresh every 30 seconds
+st_autorefresh(interval=30 * 1000, key="refresh")
+
+# Function to get live stock price
+def get_live_price(ticker_symbol):
+    try:
+        ticker = yf.Ticker(ticker_symbol)
+        todays_data = ticker.history(period='1d')
+        if not todays_data.empty:
+            current_price = todays_data['Close'].iloc[-1]
+            return round(current_price, 2)
+        return None
+    except:
+        return None
+
+# Streamlit App Configuration
 st.set_page_config(page_title="Stock Predictor", layout="centered")
 st.title("📈 Stock Price Predictor")
 
@@ -24,6 +43,14 @@ end_date = st.sidebar.date_input("End Date", value=pd.to_datetime("2023-12-31"))
 seq_length = st.sidebar.slider("Sequence Length", 30, 100, 60)
 epochs = st.sidebar.slider("Epochs (for LSTM)", 1, 20, 10)
 model_type = st.sidebar.selectbox("Select Model", ["LSTM", "XGBoost"])
+
+# Display live stock price
+st.subheader(f"📍 Live Stock Price for **{ticker}**")
+live_price = get_live_price(ticker)
+if live_price:
+    st.metric(label="Current Price", value=f"${live_price}")
+else:
+    st.warning("Unable to fetch live price.")
 
 if st.button("Predict"):
 
