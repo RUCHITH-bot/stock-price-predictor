@@ -3,7 +3,7 @@ import time
 import requests
 
 # Set up your NewsAPI key (sign up at https://newsapi.org/)
-API_KEY = 'your_news_api_key'  # Replace with your actual API key
+API_KEY = '7f14023dd95d45d884e821f2e44fcfb5'  # Replace with your actual API key
 
 # Placeholder for news updates
 news_placeholder = st.empty()
