@@ -1,4 +1,16 @@
+import streamlit as st
+
+# ✅ Page config should be at the VERY TOP — BEFORE any st.xxx functions
+st.set_page_config(page_title="📈 Stock Predictor", layout="centered")
+
+# Now import the rest
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.metrics import mean_squared_error
 import sys, os
+
+# Add src path to import custom modules
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 
 from model_xgb import build_xgb_model
@@ -6,8 +18,6 @@ from data_loader import download_stock_data
 from preprocessing import preprocess_data
 from model_lstm import build_lstm_model
 
-
-st.set_page_config(page_title="Stock Predictor", layout="centered")
 st.title("📈 Stock Price Predictor")
 
 # Sidebar Inputs
