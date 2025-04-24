@@ -1,10 +1,4 @@
 from xgboost import XGBRegressor
 
 def build_xgb_model():
-    model = XGBRegressor(objective='reg:squarederror', n_estimators=100)
-    return model
-from xgboost import XGBRegressor
-
-def build_xgb_model():
-    model = XGBRegressor(objective='reg:squarederror', n_estimators=100)
-    return model
+    return XGBRegressor(n_estimators=100, learning_rate=0.1, max_depth=3)
